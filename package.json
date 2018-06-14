@@ -4,13 +4,19 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "parcel index.html",
     "sync": "ts-node radiorecord.ts"
   },
   "dependencies": {
     "@types/node": "^10.3.3",
     "@types/node-fetch": "^2.1.1",
+    "@types/react": "^16.3.17",
+    "@types/react-dom": "^16.0.6",
     "@types/xml2js": "^0.4.3",
     "node-fetch": "^2.1.2",
+    "parcel-bundler": "^1.9.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "ts-node": "^6.1.1",
     "typescript": "^2.9.2",
     "xml2js": "^0.4.19"

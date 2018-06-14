@@ -14,18 +14,6 @@ import { FeedResponse, Item } from "./feed";
   fs.writeFileSync("./feed.json", JSON.stringify(mapper(json), null, 2));
 })();
 
-interface Podcast {
-  items: PodcastItem[];
-}
-
-interface PodcastItem {
-  url: string;
-  title: string;
-  description: string;
-  duration: string;
-  pubDate: string;
-}
-
 function mapper(response: FeedResponse): Podcast {
   const responseItems: Item[] = response.rss.channel[0].item;
 

@@ -1,1 +1,4 @@
 feed.json
+yarn-error.log
+dist
+.cache
