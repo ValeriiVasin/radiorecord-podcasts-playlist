@@ -1,6 +1,4 @@
 import fetch from 'node-fetch';
-import fs from 'fs';
-import { promisify } from 'util';
 import { parseString } from 'xml2js';
 import { FeedResponse, Item } from '../../feed';
 
@@ -8,10 +6,17 @@ export const getRadioRecordPodcast = async () => {
   const responseXML = await fetch('http://www.radiorecord.ru/rss.xml').then(
     response => response.text()
   );
-  const parseXML = promisify<string, FeedResponse>(parseString);
-  const json = await parseXML(responseXML);
 
-  return mapper(json);
+  return new Promise<Podcast>((resolve, reject) => {
+    parseString(responseXML, (err, json: FeedResponse) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      resolve(mapper(json));
+    });
+  });
 };
 
 function mapper(response: FeedResponse): Podcast {

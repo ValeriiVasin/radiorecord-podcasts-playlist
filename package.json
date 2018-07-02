@@ -8,7 +8,7 @@
     "sync": "ts-node sync.ts"
   },
   "dependencies": {
-    "@types/node": "^10.3.3",
+    "@types/node": "^6.11.5",
     "@types/react": "^16.3.17",
     "@types/react-dom": "^16.0.6",
     "firebase-admin": "^5.12.1",
