@@ -22,6 +22,7 @@ open http://localhost:1234
 ```bash
 cd functions
 yarn
+yarn firebase login
 yarn start
 ```
 
