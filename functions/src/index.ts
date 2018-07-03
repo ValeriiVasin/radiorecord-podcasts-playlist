@@ -17,6 +17,6 @@ export const update = functions.https.onRequest(async function onRequest(
     await saveToDatabase(items);
     response.send('OK');
   } catch (error) {
-    response.send(`Error: ${error}`);
+    response.status(503).send('NOT OK');
   }
 });
