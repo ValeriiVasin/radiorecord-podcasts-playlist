@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel index.html",
+    "deploy": "parcel build index.html --public-url /radiorecord-podcasts-playlist; gh-pages -d dist",
     "sync": "ts-node sync.ts"
   },
   "dependencies": {
@@ -20,6 +21,7 @@
     "typescript": "^2.9.2"
   },
   "devDependencies": {
-    "firebase-tools": "^3.19.1"
+    "firebase-tools": "^3.19.1",
+    "gh-pages": "^1.2.0"
   }
 }
