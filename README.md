@@ -13,3 +13,7 @@ yarn sync
 yarn start
 open http://localhost:1234
 ```
+
+## Stack
+- Firebase (database + functions)
+- cron-job.org for cron execution
