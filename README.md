@@ -3,13 +3,26 @@
 ## Motivation
 iTunes fails to work properly with long compositions. Fortunately it does expose RSS feed link which we could use to extract compositions and play them directly from the browser.
 
-## How to use
+## Quickstart
 
 ```bash
 git clone git@github.com:ValeriiVasin/radiorecord-podcasts-playlist.git
 cd radiorecord-podcasts-playlist
 yarn
-yarn sync
 yarn start
 open http://localhost:1234
 ```
+
+## Stack
+- [Parcel bundler](https://parceljs.org)
+- Firebase (database + cloud functions)
+- cron-job.org for scheduled cloud functions execution
+
+## Firebase Cloud Functions development
+```bash
+cd functions
+yarn
+yarn firebase login
+yarn start
+```
+
