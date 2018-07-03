@@ -46,7 +46,7 @@ class App extends Component {
         <span> / </span>
         <span>{item.duration}</span>
         {item.description && <Fragment>
-          <span> / </span>,
+          <span> / </span>
           <button onClick={() => this.handleInfoClick(item.url)}>
             toggle info
           </button>
