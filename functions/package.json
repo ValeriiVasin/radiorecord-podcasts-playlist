@@ -18,7 +18,7 @@
     "xml2js": "^0.4.19"
   },
   "devDependencies": {
-    "firebase-tools": "^3.19.1",
+    "firebase-tools": "^3.19.2",
     "typescript": "^2.5.3"
   },
   "private": true

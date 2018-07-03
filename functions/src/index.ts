@@ -12,6 +12,13 @@ export const update = functions.https.onRequest(async function onRequest(
   request,
   response
 ) {
+  const key = request.query.key;
+
+  if (key !== functions.config().podcasts.key) {
+    response.status(403).send('NOT ALLOWED');
+    return;
+  }
+
   try {
     const { items } = await getRadioRecordPodcast();
     await saveToDatabase(items);
