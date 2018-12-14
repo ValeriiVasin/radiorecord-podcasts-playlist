@@ -8,8 +8,8 @@ iTunes fails to work properly with long compositions. Fortunately it does expose
 ```bash
 git clone git@github.com:ValeriiVasin/radiorecord-podcasts-playlist.git
 cd radiorecord-podcasts-playlist
-yarn
-yarn start
+npm install
+npm start
 open http://localhost:1234
 ```
 
@@ -21,8 +21,8 @@ open http://localhost:1234
 ## Firebase Cloud Functions development
 ```bash
 cd functions
-yarn
-yarn firebase login
-yarn start
+npm install
+npx firebase login
+npm start
 ```
 
