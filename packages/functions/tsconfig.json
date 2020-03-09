@@ -1,15 +1,13 @@
 {
   "compilerOptions": {
-    "lib": ["es6"],
     "module": "commonjs",
     "noImplicitReturns": true,
     "outDir": "lib",
     "sourceMap": true,
-    "target": "es6",
+    "target": "es2017",
     "allowSyntheticDefaultImports": true,
-    // disable automatic inclusion of parent types
-    "types": ["node"]
+    "lib": ["es2017"]
   },
   "compileOnSave": true,
-  "include": ["src/**/*", "../*.d.ts"]
+  "include": ["src/**/*", "*.d.ts"]
 }
