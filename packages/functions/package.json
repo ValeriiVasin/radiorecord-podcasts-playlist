@@ -4,7 +4,8 @@
     "postinstall": "npm install --prefix functions",
     "start": "npm run shell --prefix functions",
     "deploy": "npm run deploy --prefix functions",
-    "check-types": "npm run check-types --prefix functions"
+    "check-types": "npm run check-types --prefix functions",
+    "firebase-update": "npm install firebase-functions@latest firebase-admin@latest --save --prefix functions"
   },
   "main": "lib/index.js",
   "engines": {
