@@ -1,8 +1,9 @@
 {
   "name": "functions",
   "scripts": {
+    "postinstall": "npm install --prefix functions",
     "start": "npm run shell --prefix functions",
-    "postinstall": "npm install --prefix functions"
+    "deploy": "npm run deploy --prefix functions"
   },
   "main": "lib/index.js",
   "engines": {
