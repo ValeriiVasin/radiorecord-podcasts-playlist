@@ -1,67 +1,57 @@
-import React, { Fragment, Component } from 'react';
-import { render } from 'react-dom';
+import React, { FC, useCallback, useEffect, useState } from "react";
+import { render } from "react-dom";
 
-interface AppState {
-  loading: boolean;
-  items: PodcastItem[];
-  infoShown: {
-    [id: string]: boolean;
-  };
-}
+const Podcast: FC<{ podcast: PodcastItem }> = ({ podcast }) => {
+  const [showInfo, setShowInfo] = useState(false);
+  const toggleInfo = useCallback(() => setShowInfo(!showInfo), [showInfo]);
 
-class App extends Component {
-  state: AppState = {
-    loading: false,
-    items: [],
-    infoShown: {}
-  };
-
-  async componentDidMount() {
-    this.setState({ loading: true });
-    const items = await fetch(
-      'https://itunes-podcasts.firebaseio.com/items.json'
-    ).then(response => response.json());
-    this.setState({ items, loading: false });
-  }
-
-  handleInfoClick = (url: string) => {
-    const { infoShown } = this.state;
-    const isOpened = Boolean(infoShown[url]);
-    const nextInfoShown = { ...infoShown, [url]: !isOpened };
-    this.setState({ infoShown: nextInfoShown });
-  };
-
-  shouldShowInfo = (url: string): boolean => Boolean(this.state.infoShown[url]);
-
-  render() {
-    if (this.state.loading) {
-      return <h1>Loading...</h1>;
-    }
-
-    const items = this.state.items.map(item => (
-      <li key={item.url}>
-        <a href={item.url} target="_blank">
-          {item.title}
-        </a>
-        <span> / </span>
-        <span>{item.duration}</span>
-        {item.description && <Fragment>
+  return (
+    <li>
+      <a href={podcast.url} target="_blank">
+        {podcast.title}
+      </a>
+      <span> / </span>
+      <span>{podcast.duration}</span>
+      {podcast.description && (
+        <>
           <span> / </span>
-          <button onClick={() => this.handleInfoClick(item.url)}>
-            toggle info
-          </button>
-        </Fragment>}
-        {this.shouldShowInfo(item.url) ? <pre>{item.description}</pre> : null}
-      </li>
-    ));
+          <button onClick={toggleInfo}>toggle info</button>
+        </>
+      )}
+      {showInfo && <pre>{podcast.description}</pre>}
+    </li>
+  );
+};
 
-    return (
-      <Fragment>
-        <h1>Radio Record Latest Podcasts</h1>
-        <ul>{items}</ul>
-      </Fragment>
-    );
+const App: FC = () => {
+  const [loading, setLoading] = useState(false);
+  const [items, setItems] = useState<PodcastItem[]>([]);
+
+  useEffect(() => {
+    (async function() {
+      setLoading(true);
+      const podcasts: PodcastItem[] = await fetch(
+        "https://itunes-podcasts.firebaseio.com/items.json"
+      ).then(response => response.json());
+      setItems(podcasts);
+      setLoading(false);
+    })();
+  }, []);
+
+  if (loading) {
+    return <h1>Loading...</h1>;
   }
-}
 
-render(<App />, document.getElementById('root'));
+  return (
+    <>
+      <h1>Radio Record Latest Podcasts</h1>
+      <ul>
+        {items.map(item => (
+          <Podcast key={item.url} podcast={item} />
+        ))}
+      </ul>
+    </>
+  );
+};
+
+render(<App />, document.getElementById("root"));
