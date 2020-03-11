@@ -16,7 +16,7 @@
 {:then items}
   {#each items as podcast}
     <li>
-      <a href={podcast.url} target="_blank">{podcast.title}</a>
+      <a href={podcast.url} target="blank">{podcast.title}</a>
       <span>/</span>
       <span>{podcast.duration}</span>
       {#if podcast.description}
