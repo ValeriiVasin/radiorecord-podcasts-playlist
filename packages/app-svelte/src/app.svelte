@@ -1,6 +1,4 @@
 <script>
-  import { slide } from "svelte/transition";
-
   async function fetchPodcasts() {
     return fetch("https://itunes-podcasts.firebaseio.com/items.json").then(
       response => response.json()
@@ -26,7 +24,7 @@
         <button on:click={() => toggleInfo(podcast.url)}>toggle info</button>
       {/if}
       {#if toggled[podcast.url]}
-        <pre transition:slide>{podcast.description}</pre>
+        <pre>{podcast.description}</pre>
       {/if}
     </li>
   {/each}
