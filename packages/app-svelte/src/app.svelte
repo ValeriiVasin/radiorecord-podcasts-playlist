@@ -1,9 +1,20 @@
 <script>
+  import { onMount } from 'svelte';
+  import Player from './player.svelte';
+
   async function fetchPodcasts() {
     return fetch(
       'https://itunes-podcasts.firebaseio.com/items.json'
     ).then((response) => response.json());
   }
+
+  let items;
+  let loading = true;
+  onMount(async () => {
+    loading = true;
+    items = await fetchPodcasts();
+    loading = false;
+  });
 
   const toggled = {};
   function toggleInfo(url) {
@@ -17,30 +28,20 @@
     title = podcast.title;
   }
 
+  function playNext() {
+    const index = items.findIndex((item) => item.url === src);
+    if (index === items.length - 1) {
+      play(items[0]);
+      return;
+    }
+
+    play(items[index + 1]);
+  }
+
   $: document.title = title;
 </script>
 
 <style>
-  .player {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    background-color: white;
-    width: 100%;
-    border-top: 1px solid #a5a8ab;
-    box-shadow: 0 -2px 8px #a5a8ab;
-  }
-  .title {
-    font-weight: bold;
-    padding: 8px;
-    text-align: center;
-  }
-  audio {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-  }
-
   .play-button {
     padding: 0;
     border: none;
@@ -55,14 +56,11 @@
 
 <!-- svelte-ignore a11y-media-has-caption -->
 
-{#await fetchPodcasts()}
+{#if loading}
   <h1>Loading...</h1>
-{:then items}
+{:else}
   {#if src}
-    <div class="player">
-      <div class="title">{title}</div>
-      <audio {src} controls autoplay />
-    </div>
+    <Player {src} {title} autoplay={true} on:ended={playNext} />
   {/if}
   <ul>
     {#each items as podcast}
@@ -82,4 +80,4 @@
       </li>
     {/each}
   </ul>
-{/await}
+{/if}
