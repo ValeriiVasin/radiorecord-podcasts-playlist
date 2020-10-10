@@ -8,7 +8,7 @@ iTunes fails to work properly with long compositions. Fortunately it does expose
 
 ```bash
 git clone git@github.com:ValeriiVasin/radiorecord-podcasts-playlist.git
-cd radiorecord-podcasts-playli
+cd radiorecord-podcasts-playlist
 
 npm install
 npx lerna bootstrap
