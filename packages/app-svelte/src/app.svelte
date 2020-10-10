@@ -16,6 +16,8 @@
     src = podcast.url;
     title = podcast.title;
   }
+
+  $: document.title = title;
 </script>
 
 <style>
@@ -51,15 +53,16 @@
   }
 </style>
 
+<!-- svelte-ignore a11y-media-has-caption -->
+
 {#await fetchPodcasts()}
   <h1>Loading...</h1>
 {:then items}
-  <!-- svelte-ignore a11y-media-has-caption -->
   {#if src}
-  <div class="player">
-    <div class="title">{title}</div>
-    <audio {src} controls autoplay />
-  </div>
+    <div class="player">
+      <div class="title">{title}</div>
+      <audio {src} controls autoplay />
+    </div>
   {/if}
   <ul>
     {#each items as podcast}
